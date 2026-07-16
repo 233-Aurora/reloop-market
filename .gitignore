@@ -32,3 +32,10 @@ yarn-error.log*
 附加信息.md
 .env
 .env.*
+
+# Internal working docs (keep local, do not publish)
+重构文档.md
+项目进度.md
+CampusEcho/数据库修改文档.md
+CampusEcho-web/前端进度.md
+CampusEcho/HELP.md

@@ -255,8 +255,6 @@ psql -h localhost -U <用户> -d campusecho -f CampusEcho/scripts/sql/create_loc
 | 用户 | 发布 / 编辑物品、我的物品、我的交易、交易详情、消息中心、我的争议、我的举报、个人资料 |
 | 管理 | 管理概览、用户管理、分类管理、举报处理、争议仲裁 |
 
-前端实现细节见 `CampusEcho-web/前端进度.md`。
-
 ---
 
 ## 数据库迁移
@@ -272,8 +270,6 @@ psql -h localhost -U <用户> -d campusecho -f CampusEcho/scripts/sql/create_loc
 | V6 | 举报表与物品审核状态 |
 | V7 | 消息通知字段扩展 |
 | V8 | 交易争议表与 `DISPUTED` 状态 |
-
-变更记录见 `CampusEcho/数据库修改文档.md`。
 
 ---
 
@@ -316,10 +312,8 @@ npm run build
 | 文档 | 说明 |
 | --- | --- |
 | [API文档.md](./API文档.md) | 接口约定与请求示例 |
-| [重构文档.md](./重构文档.md) | 架构、数据模型与迭代设计 |
-| [项目进度.md](./项目进度.md) | 已完成能力与验证记录 |
-| [CampusEcho/数据库修改文档.md](./CampusEcho/数据库修改文档.md) | 数据库结构变更 |
-| [CampusEcho-web/前端进度.md](./CampusEcho-web/前端进度.md) | 前端页面与导航 |
+
+后端数据库迁移说明见 `CampusEcho/src/main/resources/db/migration/` 目录中的 SQL 文件。
 
 ---
 
