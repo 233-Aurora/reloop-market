@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: CampusEcho
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  autoconfigure:
+    exclude: org.springframework.boot.security.autoconfigure.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:campusecho}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  error:
+    include-message: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    issuer: campusecho
+    access-token-ttl: PT24H
+  storage:
+    item-images:
+      directory: ${ITEM_IMAGE_DIRECTORY:./data/item-images}
+      max-file-size: 5MB
+      max-files-per-item: 5
+    avatars:
+      directory: ${AVATAR_DIRECTORY:./data/avatars}
+      max-file-size: 2MB

@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+
+# Backend
+CampusEcho/target/
+CampusEcho/.mvn/wrapper/maven-wrapper.jar
+CampusEcho/data/
+CampusEcho/src/main/resources/application-local.yaml
+
+# Frontend
+CampusEcho-web/node_modules/
+CampusEcho-web/dist/
+CampusEcho-web/dist-ssr/
+CampusEcho-web/*.local
+CampusEcho-web/auto-imports.d.ts
+CampusEcho-web/components.d.ts
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local secrets / notes (never commit credentials)
+附加信息.md
+.env
+.env.*
