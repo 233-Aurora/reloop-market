@@ -99,7 +99,7 @@ async function loadDetail() {
   try {
     const detail = await fetchItem(itemId.value)
     item.value = detail
-    document.title = `${detail.title} · CampusEcho`
+    document.title = `${detail.title} · ReLoop Market`
     await loadSeller(detail.sellerId)
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) {

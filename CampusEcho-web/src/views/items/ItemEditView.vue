@@ -70,7 +70,7 @@ function applyItem(next: ItemResponse) {
     condition: next.condition,
     locationText: next.locationText,
   }
-  document.title = `编辑 ${next.title} · CampusEcho`
+  document.title = `编辑 ${next.title} · ReLoop Market`
 }
 
 async function loadItem() {

@@ -90,7 +90,7 @@ async function handleSubmit() {
   <section class="auth-card" aria-labelledby="login-title">
     <header class="auth-card-header">
       <h1 id="login-title">登录</h1>
-      <p>使用用户名或邮箱登录 CampusEcho</p>
+      <p>使用用户名或邮箱登录 ReLoop Market</p>
     </header>
 
     <ProblemAlert

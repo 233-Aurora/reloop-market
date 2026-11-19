@@ -86,7 +86,7 @@ async function loadProfile() {
 
   try {
     profile.value = await fetchUserProfile(userId.value)
-    document.title = `${profile.value.displayName} · CampusEcho`
+    document.title = `${profile.value.displayName} · ReLoop Market`
     await loadReviews(userId.value, 1)
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) {

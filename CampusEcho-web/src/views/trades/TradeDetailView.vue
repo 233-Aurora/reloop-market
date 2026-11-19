@@ -106,7 +106,7 @@ async function loadDetail(options?: { silent?: boolean }) {
   try {
     const detail = await fetchTradeRequest(tradeId.value)
     trade.value = detail
-    document.title = `交易 #${detail.id} · CampusEcho`
+    document.title = `交易 #${detail.id} · ReLoop Market`
     const tasks: Promise<void>[] = []
     if (counterpartyId.value) {
       tasks.push(loadCounterparty(counterpartyId.value))

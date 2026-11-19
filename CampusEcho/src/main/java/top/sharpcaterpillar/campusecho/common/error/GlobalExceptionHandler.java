@@ -2,8 +2,10 @@ package top.sharpcaterpillar.campusecho.common.error;
 
 import java.net.URI;
 import java.util.Map;
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -46,6 +48,17 @@ public class GlobalExceptionHandler {
         problem.setType(URI.create("https://campusecho.local/problems/file-too-large"));
         problem.setTitle(ErrorCode.FILE_TOO_LARGE.message());
         problem.setProperty("code", ErrorCode.FILE_TOO_LARGE.name());
+        return problem;
+    }
+
+    @ExceptionHandler({OptimisticLockingFailureException.class, OptimisticLockException.class})
+    ProblemDetail handleOptimisticLockException(Exception exception) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                "数据已被其他请求更新，请刷新后重试");
+        problem.setType(URI.create("https://campusecho.local/problems/concurrent-modification"));
+        problem.setTitle("并发修改冲突");
+        problem.setProperty("code", "CONCURRENT_MODIFICATION");
         return problem;
     }
 

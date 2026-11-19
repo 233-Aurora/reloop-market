@@ -175,14 +175,41 @@ onMounted(() => {
 
 <template>
   <section class="ce-page home-page">
-    <header class="ce-page-header home-hero">
-      <div>
-        <h1>物品市场</h1>
-        <p class="ce-page-desc">浏览同学发布的在售物品，支持搜索与分类筛选。</p>
+    <header class="market-hero">
+      <div class="hero-copy">
+        <p class="hero-kicker"><span></span> ReLoop Market <i>·</i> CAMPUS REUSE</p>
+        <h1>好物不止一站，<br /><em>继续在校园流转。</em></h1>
+        <p class="hero-description">从课本到数码，从宿舍到下一位同学。发现值得被再次使用的好物。</p>
+        <div class="hero-actions">
+          <RouterLink v-if="auth.isAuthenticated" class="hero-primary" :to="{ name: 'item-create' }">
+            发布一件闲置 <span aria-hidden="true">↗</span>
+          </RouterLink>
+          <RouterLink v-else class="hero-primary" :to="{ name: 'register' }">
+            加入校园市集 <span aria-hidden="true">↗</span>
+          </RouterLink>
+          <span class="hero-footnote">面交更安心 · 让闲置重新有用</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-ring ring-outer"></div>
+        <div class="art-ring ring-inner"></div>
+        <div class="art-disc">
+          <span class="disc-small">GIVE IT</span>
+          <strong>another<br />round</strong>
+          <span class="disc-arrow">↗</span>
+        </div>
+        <div class="art-note"><span>01 / 03</span><strong>Reuse<br />with care.</strong></div>
+        <span class="art-spark spark-one">✳</span>
+        <span class="art-spark spark-two">✳</span>
       </div>
     </header>
 
-    <div class="toolbar">
+    <section class="market-search-panel" aria-label="搜索和筛选物品">
+      <div class="search-heading">
+        <div><span class="section-kicker">THE MARKET</span><h2>逛逛校园好物</h2></div>
+        <span class="search-aside">SEARCH · FILTER · DISCOVER</span>
+      </div>
+      <div class="toolbar">
       <div class="search-bar">
         <el-input
           v-model="keywordInput"
@@ -203,16 +230,17 @@ onMounted(() => {
       <el-button class="mobile-filter-btn" :icon="Filter" @click="filterDrawerVisible = true">
         筛选
       </el-button>
-    </div>
+      </div>
 
-    <div class="desktop-filters">
-      <CategoryFilter
-        :categories="categories"
-        :model-value="categoryId"
-        :loading="categoriesLoading"
-        @update:model-value="handleCategoryChange"
-      />
-    </div>
+      <div class="desktop-filters">
+        <CategoryFilter
+          :categories="categories"
+          :model-value="categoryId"
+          :loading="categoriesLoading"
+          @update:model-value="handleCategoryChange"
+        />
+      </div>
+    </section>
 
     <div class="ce-result-bar">
       <p>
@@ -305,12 +333,79 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.home-hero {
-  padding: 18px 20px;
-  background: linear-gradient(135deg, #ffffff 0%, #eef8f5 100%);
-  border: 1px solid var(--ce-color-border);
-  border-radius: var(--ce-radius);
+.market-hero {
+  position: relative;
+  min-height: 300px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  align-items: center;
+  overflow: hidden;
+  padding: 34px 48px;
+  border: 1px solid #e5d6c2;
+  border-radius: 22px;
+  background: #eee3d2;
   box-shadow: var(--ce-shadow-sm);
+}
+
+.hero-copy { position: relative; z-index: 1; }
+.hero-kicker,
+.section-kicker {
+  margin: 0 0 14px;
+  color: var(--ce-color-primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+.hero-kicker span { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #c37b42; vertical-align: 1px; }
+.hero-kicker i { padding: 0 5px; font-style: normal; color: #a99a84; }
+.market-hero h1 { margin: 0; color: #332b25; font-family: Georgia, 'Songti SC', serif; font-size: clamp(34px, 4vw, 54px); font-weight: 600; line-height: 1.18; letter-spacing: -0.045em; }
+.market-hero h1 em { color: var(--ce-color-primary); font-style: normal; }
+.hero-description { max-width: 500px; margin: 16px 0 0; color: #76695d; font-size: 15px; line-height: 1.8; }
+.hero-actions { display: flex; align-items: center; gap: 18px; margin-top: 22px; }
+.hero-primary { display: inline-flex; align-items: center; gap: 18px; min-height: 46px; padding: 0 18px; border-radius: 6px; background: var(--ce-color-primary); color: #fffaf4; font-size: 14px; font-weight: 700; transition: transform .15s ease, background .15s ease; }
+.hero-primary:hover { transform: translateY(-2px); background: var(--ce-color-primary-hover); }
+.hero-primary span { font-size: 18px; }
+.hero-footnote { color: #8b7c6c; font-size: 12px; }
+.hero-art { position: relative; min-height: 230px; display: grid; place-items: center; }
+.art-ring { position: absolute; border: 1px solid rgba(164, 96, 66, .24); border-radius: 50%; }
+.ring-outer { width: 238px; height: 238px; }
+.ring-inner { width: 188px; height: 188px; border-style: dashed; }
+.art-disc { position: relative; width: 148px; height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 50%; background: #bd5037; color: #fff5e9; text-align: center; transform: rotate(-9deg); box-shadow: 0 18px 30px rgba(123, 61, 42, .2); }
+.disc-small { font-size: 9px; font-weight: 700; letter-spacing: .18em; }
+.art-disc strong { margin-top: 5px; font-family: Georgia, serif; font-size: 22px; line-height: .95; }
+.disc-arrow { position: absolute; right: 17px; bottom: 15px; font-size: 20px; }
+.art-note { position: absolute; right: 2%; bottom: 4px; padding: 10px 13px; border: 1px solid #e3d3c0; background: #fbf6ec; color: #786858; transform: rotate(4deg); box-shadow: 0 6px 14px rgba(66, 47, 32, .08); }
+.art-note span { display: block; margin-bottom: 4px; color: #b56247; font-size: 9px; letter-spacing: .13em; }
+.art-note strong { font-family: Georgia, serif; font-size: 13px; line-height: 1.1; }
+.art-spark { position: absolute; color: #c17a43; }
+.spark-one { top: 7%; right: 17%; font-size: 21px; }
+.spark-two { bottom: 11%; left: 12%; color: #66836c; font-size: 15px; }
+
+.market-search-panel { display: grid; gap: 16px; padding: 22px 24px; border: 1px solid var(--ce-color-border); border-radius: 16px; background: var(--ce-color-surface); box-shadow: var(--ce-shadow-sm); }
+.search-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.search-heading h2 { margin: 0; color: var(--ce-color-ink); font-family: Georgia, 'Songti SC', serif; font-size: 23px; }
+.section-kicker { display: block; margin-bottom: 5px; font-size: 9px; }
+.search-aside { color: #a49a8d; font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+.desktop-filters { padding-top: 2px; border-top: 1px solid #eee8de; }
+.toolbar :deep(.el-input__wrapper) { min-height: 46px; background: #faf7f0; box-shadow: none; }
+.toolbar :deep(.el-input-group__append) { background: var(--ce-color-primary); color: white; box-shadow: none; }
+.toolbar :deep(.el-input-group__append .el-button) { color: white; }
+.ce-result-bar { padding: 0 2px; }
+
+@media (max-width: 800px) {
+  .market-hero { grid-template-columns: 1fr; min-height: auto; padding: 28px 24px; }
+  .hero-art { position: absolute; opacity: .16; right: 0; width: 240px; pointer-events: none; }
+  .hero-copy { max-width: 560px; }
+  .hero-description { max-width: 420px; }
+}
+
+@media (max-width: 520px) {
+  .market-hero { padding: 25px 20px; }
+  .market-hero h1 { font-size: 34px; }
+  .hero-actions { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .hero-art { right: -72px; }
+  .market-search-panel { padding: 18px 16px; }
+  .search-aside { display: none; }
 }
 
 .toolbar {

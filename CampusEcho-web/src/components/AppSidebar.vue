@@ -78,11 +78,11 @@ function onNavigate() {
       <RouterLink
         class="brand"
         to="/"
-        :title="collapsed ? 'CampusEcho' : undefined"
+        :title="collapsed ? 'ReLoop Market' : undefined"
         @click="onNavigate"
       >
-        <span class="brand-mark">C</span>
-        <span v-if="!collapsed" class="brand-text">CampusEcho</span>
+        <span class="brand-mark">R</span>
+        <span v-if="!collapsed" class="brand-text">ReLoop Market</span>
       </RouterLink>
     </div>
 
@@ -149,7 +149,7 @@ function onNavigate() {
   align-items: center;
   min-height: var(--ce-header-height);
   padding: 0 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(97, 76, 56, 0.12);
 }
 
 .collapsed .sidebar-top {
@@ -162,7 +162,7 @@ function onNavigate() {
   align-items: center;
   gap: 10px;
   min-width: 0;
-  color: #fff;
+  color: var(--ce-color-ink);
   font-weight: 700;
 }
 
@@ -173,8 +173,8 @@ function onNavigate() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
+  background: var(--ce-color-primary);
+  color: #fffaf4;
   font-size: 15px;
   flex-shrink: 0;
 }
@@ -196,7 +196,7 @@ function onNavigate() {
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: #968779;
 }
 
 .nav-item {
@@ -218,7 +218,7 @@ function onNavigate() {
 
 .nav-item:hover {
   background: var(--ce-color-sidebar-hover);
-  color: #fff;
+  color: var(--ce-color-primary-hover);
 }
 
 .nav-item.active {
@@ -236,13 +236,13 @@ function onNavigate() {
 .sidebar-footer {
   margin-top: auto;
   padding: 16px 18px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(97, 76, 56, 0.12);
 }
 
 .footer-hint {
   margin: 0;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.38);
+  color: #968779;
   line-height: 1.5;
 }
 

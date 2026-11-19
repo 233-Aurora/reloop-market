@@ -96,11 +96,7 @@ public class TradeRequestService {
         TradeRequest request = participantRequest(id, currentUser.id());
         requireSeller(request, currentUser.id());
         requireStatus(request, TradeStatus.PENDING);
-        MarketplaceItem item = item(request.getItemId());
-        if (item.getStatus() != ItemStatus.ON_SALE) {
-            throw new BusinessException(ErrorCode.BUSINESS_RULE_VIOLATION, "物品当前不可接受交易");
-        }
-        requireTradableItem(item);
+        MarketplaceItem item = lockItemForAcceptance(request.getItemId());
         request.accept();
         item.changeStatus(ItemStatus.RESERVED);
         tradeRequestRepository.findByItemIdAndStatus(item.getId(), TradeStatus.PENDING).stream()
@@ -133,7 +129,8 @@ public class TradeRequestService {
         requireSeller(request, currentUser.id());
         requireStatus(request, TradeStatus.PENDING);
         request.reject();
-        MarketplaceItem item = item(request.getItemId());
+        MarketplaceItem item = marketplaceItemRepository.findByIdForUpdate(request.getItemId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "关联物品不存在"));
         notificationService.notify(
                 request.getRequesterId(),
                 currentUser.id(),
@@ -153,7 +150,8 @@ public class TradeRequestService {
         }
         requireStatus(request, TradeStatus.PENDING);
         request.cancel();
-        MarketplaceItem item = item(request.getItemId());
+        MarketplaceItem item = marketplaceItemRepository.findByIdForUpdate(request.getItemId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "关联物品不存在"));
         notificationService.notify(
                 request.getSellerId(),
                 currentUser.id(),
@@ -172,7 +170,8 @@ public class TradeRequestService {
             throw new BusinessException(ErrorCode.BUSINESS_RULE_VIOLATION, "交易处于争议中，等待管理员仲裁");
         }
         requireStatus(request, TradeStatus.ACCEPTED);
-        MarketplaceItem item = item(request.getItemId());
+        MarketplaceItem item = marketplaceItemRepository.findByIdForUpdate(request.getItemId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "关联物品不存在"));
         requireTradableItem(item);
         boolean alreadyConfirmed = (request.getRequesterId().equals(currentUser.id())
                 && request.getRequesterConfirmedAt() != null)
@@ -218,6 +217,17 @@ public class TradeRequestService {
         return toResponse(request, item);
     }
 
+    private MarketplaceItem lockItemForAcceptance(Long itemId) {
+        MarketplaceItem item = marketplaceItemRepository.findByIdForUpdate(itemId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "关联物品不存在"));
+        if (item.getStatus() != ItemStatus.ON_SALE) {
+            throw new BusinessException(
+                    ErrorCode.ITEM_UNAVAILABLE,
+                    "物品已被其他交易占用或已下架，请刷新后重试");
+        }
+        requireTradableItem(item);
+        return item;
+    }
     private TradeRequest participantRequest(Long id, Long userId) {
         return tradeRequestRepository.findByIdAndParticipant(id, userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "交易请求不存在或无权访问"));

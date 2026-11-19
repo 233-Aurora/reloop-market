@@ -1,6 +1,8 @@
-# CampusEcho 校园二手交易平台
+# ReLoop Market — Campus Secondhand Marketplace
 
-CampusEcho 是面向校内用户的二手物品交易系统，覆盖物品发布浏览、交易协商、双方评价、站内消息、内容举报治理与交易争议仲裁。
+ReLoop Market is a campus-focused secondhand marketplace for listings, trade requests, reviews, messaging, reports, and dispute resolution.
+
+This is a learning continuation of the upstream [CampusEcho project](https://github.com/bestxiangest/Goods-Trading-Center). ReLoop Market is the local product name; retain the upstream attribution and usage terms when sharing or distributing the code.
 
 当前仓库为完整重构版：
 

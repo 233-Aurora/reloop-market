@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>top.sharpcaterpillar</groupId>
-    <artifactId>CampusEcho</artifactId>
+    <artifactId>reloop-market</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>CampusEcho</name>
-    <description>CampusEcho</description>
+    <name>ReLoop Market</name>
+    <description>Campus secondhand marketplace with safe peer-to-peer trades</description>
     <url/>
     <licenses>
         <license/>

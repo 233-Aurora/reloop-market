@@ -61,7 +61,7 @@ function select(id: number | null) {
 }
 
 .chip:hover:not(:disabled) {
-  border-color: #b7dad4;
+  border-color: #d6a38d;
   color: var(--ce-color-primary);
 }
 

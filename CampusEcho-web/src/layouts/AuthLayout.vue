@@ -4,7 +4,7 @@
 <template>
   <div class="auth-shell">
     <header class="auth-header">
-      <RouterLink class="brand" to="/">CampusEcho</RouterLink>
+      <RouterLink class="brand" to="/">ReLoop Market</RouterLink>
     </header>
     <main class="auth-main">
       <RouterView />

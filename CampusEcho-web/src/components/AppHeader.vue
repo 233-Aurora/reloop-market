@@ -21,7 +21,7 @@ const messageStore = useMessageStore()
 
 const pageTitle = computed(() => {
   const title = route.meta.title
-  return typeof title === 'string' && title ? title : 'CampusEcho'
+  return typeof title === 'string' && title ? title : 'ReLoop Market'
 })
 
 const showPublish = computed(() => {
@@ -75,7 +75,7 @@ onMounted(() => {
 
       <div class="title-block">
         <span class="page-title">{{ pageTitle }}</span>
-        <span class="brand-sub">CampusEcho</span>
+        <span class="brand-sub">ReLoop Market</span>
       </div>
     </div>
 

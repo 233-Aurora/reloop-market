@@ -49,7 +49,7 @@ async function loadDetail() {
   notFound.value = false
   try {
     dispute.value = await fetchMyDispute(disputeId.value)
-    document.title = `争议 #${dispute.value.id} · CampusEcho`
+    document.title = `争议 #${dispute.value.id} · ReLoop Market`
   } catch (error) {
     dispute.value = null
     if (error instanceof ApiError && (error.status === 404 || error.status === 403)) {

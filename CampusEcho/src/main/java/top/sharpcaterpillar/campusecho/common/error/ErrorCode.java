@@ -7,6 +7,7 @@ public enum ErrorCode {
     DUPLICATE_RESOURCE(409, "资源已存在"),
     RESOURCE_NOT_FOUND(404, "资源不存在"),
     BUSINESS_RULE_VIOLATION(409, "业务规则不允许此操作"),
+    ITEM_UNAVAILABLE(409, "物品当前不可交易"),
     UNSUPPORTED_MEDIA_TYPE(415, "不支持的文件类型"),
     FILE_TOO_LARGE(413, "文件过大"),
     FILE_STORAGE_ERROR(500, "文件存储失败");

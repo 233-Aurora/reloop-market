@@ -92,8 +92,8 @@ const imageSrc = computed(() => {
 
 .thumb {
   position: relative;
-  aspect-ratio: 4 / 3;
-  background: #eef1f4;
+  aspect-ratio: 1 / 1;
+  background: #eee6d9;
   overflow: hidden;
 }
 
@@ -112,10 +112,8 @@ const imageSrc = computed(() => {
   color: var(--ce-color-muted);
   font-size: 13px;
   background:
-    linear-gradient(135deg, #f4f6f8 25%, transparent 25%) -8px 0 / 16px 16px,
-    linear-gradient(225deg, #f4f6f8 25%, transparent 25%) -8px 0 / 16px 16px,
-    linear-gradient(315deg, #f4f6f8 25%, transparent 25%) 0 0 / 16px 16px,
-    linear-gradient(45deg, #f4f6f8 25%, #e8ecf0 25%) 0 0 / 16px 16px;
+    radial-gradient(circle at 50% 45%, #f7efe3 0 22%, transparent 23%),
+    linear-gradient(135deg, #eee2d2, #e3d4c0);
 }
 
 .status-badge {
